@@ -33,7 +33,6 @@ initMap = () => {
       fillBreadcrumb();
       DBHelper.mapMarkerForRestaurant(self.restaurant, self.newMap);
       const map_buttons = document.querySelectorAll('#map-container [tabindex="0"], #map-container a');
-      console.log(map_buttons);
       for (let v of map_buttons){
          v.setAttribute('tabindex', '-1');
       }

@@ -179,3 +179,14 @@ class DBHelper {
 
 }
 
+
+// Register Service Worker
+
+if('serviceWorker' in navigator) {
+  console.log('browser support sw');
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+    .then(reg => console.log('register works', reg))
+    .catch(err => console.log('sw not registered', err))
+  })
+}

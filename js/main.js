@@ -12,9 +12,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
   // setAttribute('tabindex', '-1');
   fetchNeighborhoods();
   fetchCuisines();
-  const map_buttons = document.querySelectorAll('#map-container [tabindex="0"]');
-  // const map_buttons = document.querySelectorAll('#map-container a');
-  console.log(map_buttons);
 
 
 });
