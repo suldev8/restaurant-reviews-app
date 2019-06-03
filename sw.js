@@ -12,15 +12,11 @@ const CACHE_ASSETS = [
 self.addEventListener('install', event => {
     event.waitUntil(
         caches.open(CACHE_NAME)
-            .then(cache => {
-                console.log('Opened caching');
-                return cache.addAll(CACHE_ASSETS);
-            })
+            .then(cache => cache.addAll(CACHE_ASSETS))
     )
 });
 
 self.addEventListener('activate', event => {
-    console.log('activating')
     event.waitUntil(
         caches.keys().then(cachesNames => {
             return Promise.all(
@@ -35,34 +31,7 @@ self.addEventListener('activate', event => {
 });
 
 
-
-
-// self.addEventListener('fetch', event => {
-//     console.log('fetch listener');
-//     event.respondWith(
-//         caches.match(event.request)
-//         .then(response => {
-//             if (response){
-//                 return response;
-//             }
-
-//         return fetch(e.request)
-//             .then(response => {
-//                 if(!response || response.status !== 200 || response.type !== 'basic') {
-//                     return response;
-//                 }
-//                 const responseToCache = response.clone();
-//                 caches.open(CACHE_NAME)
-//                     .then(cache => {
-//                         console.log('caching');
-//                         cache.put(event.request, responseToCache);
-//                     })
-//                 return response;
-//             });
-//         }));
-// })
 self.addEventListener('fetch', event => {
-    console.log('fetch listener');
     event.respondWith(
         caches.match(event.request)
             .then(response => {
