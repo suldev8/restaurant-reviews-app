@@ -9,8 +9,14 @@ var markers = []
  */
 document.addEventListener('DOMContentLoaded', (event) => {
   initMap(); // added 
+  // setAttribute('tabindex', '-1');
   fetchNeighborhoods();
   fetchCuisines();
+  const map_buttons = document.querySelectorAll('#map-container [tabindex="0"]');
+  // const map_buttons = document.querySelectorAll('#map-container a');
+  console.log(map_buttons);
+
+
 });
 
 /**
@@ -73,10 +79,10 @@ fillCuisinesHTML = (cuisines = self.cuisines) => {
  */
 initMap = () => {
   self.newMap = L.map('map', {
-        center: [40.722216, -73.987501],
-        zoom: 12,
-        scrollWheelZoom: false
-      });
+    center: [40.722216, -73.987501],
+    zoom: 12,
+    scrollWheelZoom: false
+  });
   L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.jpg70?access_token={mapboxToken}', {
     mapboxToken: 'pk.eyJ1Ijoic3VsZGV2OCIsImEiOiJjandiY2JzeWkwYThtNDhvMnUwcDFoc3V0In0.JTpQyESbfnRhgCLadUPQdA',
     maxZoom: 18,
@@ -120,6 +126,11 @@ updateRestaurants = () => {
     } else {
       resetRestaurants(restaurants);
       fillRestaurantsHTML();
+      
+      const map_buttons = document.querySelectorAll('#map-container [tabindex="0"], #map-container a');
+      for (let v of map_buttons){
+         v.setAttribute('tabindex', '-1');
+      }
     }
   })
 }
@@ -180,9 +191,14 @@ createRestaurantHTML = (restaurant) => {
   address.innerHTML = restaurant.address;
   details.append(address);
 
+  // const moreLabel = document.createElement('label');
+  // moreLabel.innerText = `${restaurant.name} details`;
+  // details.appendChild(moreLabel);
+
   const more = document.createElement('a');
   more.innerHTML = 'View Details';
   more.href = DBHelper.urlForRestaurant(restaurant);
+  more.setAttribute('aria-label', `${restaurant.name} details`);
   details.append(more)
 
   return li
@@ -202,7 +218,8 @@ addMarkersToMap = (restaurants = self.restaurants) => {
     self.markers.push(marker);
   });
 
-} 
+
+}
 /* addMarkersToMap = (restaurants = self.restaurants) => {
   restaurants.forEach(restaurant => {
     // Add marker to the map
