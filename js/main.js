@@ -123,10 +123,10 @@ updateRestaurants = () => {
     } else {
       resetRestaurants(restaurants);
       fillRestaurantsHTML();
-      
+
       const map_buttons = document.querySelectorAll('#map-container [tabindex="0"], #map-container a');
-      for (let v of map_buttons){
-         v.setAttribute('tabindex', '-1');
+      for (let v of map_buttons) {
+        v.setAttribute('tabindex', '-1');
       }
     }
   })

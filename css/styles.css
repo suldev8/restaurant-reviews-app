@@ -342,10 +342,6 @@ Media queries
     margin-left: 0;
     margin-right: 0;
   }
-
-  .filter-options {
-    /* flex-direction: column; */
-  }
   .filter-options select {
     width: 35%;
     margin: 10px 10px;
@@ -356,9 +352,6 @@ Media queries
 
   #restaurants-list li {
     width: 25%;
-  }
-  #main-details {
-    
   }
   
   #restaurant-container {
